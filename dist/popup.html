@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coursera Automation Extension</title>
+    <link rel="stylesheet" href="ui/design-tokens.css" />
+    <link rel="stylesheet" href="ui/popup.css" />
+    <script src="scripts/popup.js"></script>
+    <script src="scripts/popup-ui.js"></script>
+  </head>
+
+  <body>
+    <div id="courseraModel">
+      <!-- Top Brand & Header -->
+      <header class="app-header">
+        <div class="brand-wrapper">
+          <div class="brand-icon-box" title="Coursera Automator">
+            <svg viewBox="0 0 24 24" width="20" height="20">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </svg>
+          </div>
+          <div class="brand-text">
+            <h1 id="courseraModelTitle">Coursera Automator</h1>
+            <span class="brand-version">v3.6.10 • Pro Suite</span>
+          </div>
+        </div>
+
+        <div class="header-actions">
+          <button id="settingsBtn" class="settings-btn" title="Open Settings" aria-label="Settings">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3"></circle>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      <!-- Live Connection Pill Banner -->
+      <div class="connection-bar">
+        <div class="connection-status">
+          <span id="connDot" class="status-dot offline"></span>
+          <span id="connText">Detecting Coursera tab...</span>
+        </div>
+        <a id="connAction" class="tab-action-link" style="display: none;">Open Coursera</a>
+      </div>
+
+      <!-- Action Toast Banner -->
+      <div id="actionToast" class="action-feedback-toast" style="display: none;"></div>
+
+      <div id="courseraModelContent">
+        <!-- User Profile Header -->
+        <div id="userProfile" class="user-profile hidden">
+          <div class="user-info">
+            <span id="userName" class="user-name">Loading...</span>
+            <div id="userEmail" class="user-email"></div>
+          </div>
+          <div id="proBadge" class="pro-badge hidden">ACTIVATED</div>
+        </div>
+
+        <!-- Usage Statistics Cards -->
+        <div id="usageStats" class="usage-stats hidden">
+          <div class="stat-item">
+            <span class="stat-label">Daily Quota</span>
+            <span id="remainingQuota" class="stat-value">0/0</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Plan Expiry</span>
+            <span id="daysRemaining" class="stat-value">0 days</span>
+          </div>
+        </div>
+
+        <!-- Search / Filter for Fast Access -->
+        <div class="search-wrapper">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" id="actionSearch" class="search-input" placeholder="Search automation tools..." autocomplete="off" />
+        </div>
+
+        <!-- Action Section Header -->
+        <div class="section-heading">
+          <span class="section-title">
+            Course Actions
+          </span>
+          <span class="section-badge-free">Free &amp; Local</span>
+        </div>
+
+        <!-- Dynamic Grid Populated by popup.js -->
+        <div id="courseraModelGrid"></div>
+
+        <!-- Support / Buy Me a Shawarma Section -->
+        <div id="shawarmaContainer" class="shawarma-container">
+          <p class="shawarma-tagline">Enjoying the extension? Fuel the next update with a shawarma 🌯</p>
+          <div class="shawarma-actions">
+            <a
+              href="upi://pay?pa=9067972218%40amazonpay&pn=NodeNexus&cu=INR"
+              id="shawarmaBtn"
+              class="shawarma-btn"
+              role="button"
+              title="Open UPI payment intent for NodeNexus"
+            >
+              <span>🌯 Buy Me a Shawarma</span>
+            </a>
+            <button id="copyUpiPopupBtn" class="shawarma-copy-btn" type="button" title="Copy UPI ID (9067972218@amazonpay)">
+              <span id="copyUpiPopupIcon" aria-hidden="true">📋</span>
+              <span id="copyUpiPopupText">Copy UPI</span>
+            </button>
+          </div>
+          <!-- Desktop Fallback info display -->
+          <div id="upiFallbackNotice" class="upi-fallback-notice" style="display: none;">
+            <div class="upi-id-box">
+              <span class="upi-label">UPI ID:</span>
+              <code class="upi-val">9067972218@amazonpay</code>
+            </div>
+            <span class="upi-hint">Compatible with Google Pay, PhonePe, Paytm, or Amazon Pay</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer Area with NodeNexus Attribution -->
+      <footer id="footer" class="app-footer">
+        <div class="footer-attribution">
+          <span class="attribution-text" title="Creator: NodeNexus">Created by NodeNexus</span>
+          <span class="attribution-divider" aria-hidden="true">•</span>
+          <a
+            href="https://github.com/NodeNexus"
+            id="githubLink"
+            class="attribution-link"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub profile of NodeNexus (opens in a new tab)"
+          >GitHub ↗</a>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

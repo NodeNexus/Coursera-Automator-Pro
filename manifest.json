@@ -1,0 +1,63 @@
+{
+  "manifest_version": 3,
+  "name": "Coursera Automation Extension",
+  "version": "3.6.10",
+  "author": "NodeNexus",
+  "version_name": "Release Version",
+  "description": "Created by NodeNexus • Extension to automate Coursera lecture video navigation, readings, practice exercises, and course backups.",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting",
+    "tabs",
+    "commands",
+    "downloads"
+  ],
+  "background": {
+    "service_worker": "/dist/scripts/background.js"
+  },
+  "icons": {
+    "16": "dist/assets/1.png",
+    "32": "dist/assets/2.png",
+    "48": "dist/assets/3.png",
+    "128": "dist/assets/4.png"
+  },
+  "action": {
+    "default_popup": "dist/popup.html"
+  },
+  "options_page": "dist/settings.html",
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": [
+        "*://*.coursera.org/*"
+      ],
+      "js": [
+        "dist/scripts/content.js",
+        "dist/scripts/xyz.js"
+      ],
+      "css": [
+        "dist/ui/content.css"
+      ]
+    }
+  ],
+  "commands": {
+    "open_popup_1": {
+      "suggested_key": {
+        "default": "Alt+B",
+        "mac": "Command+B"
+      },
+      "description": "Open the Course Automation Extension popup window with Alt+B"
+    },
+    "open_popup_2": {
+      "suggested_key": {
+        "default": "Alt+W",
+        "mac": "Command+W"
+      },
+      "description": "Open the Course Automation Extension popup window with Alt+W"
+    }
+  },
+  "host_permissions": [
+    "*://*.coursera.org/*"
+  ]
+}

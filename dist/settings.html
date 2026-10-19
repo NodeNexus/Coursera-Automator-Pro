@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Settings — Coursera Automator</title>
+  <link rel="stylesheet" href="ui/design-tokens.css" />
+  <link rel="stylesheet" href="ui/settings.css" />
+</head>
+
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="header-title-box">
+        <div class="header-icon">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+        </div>
+        <div>
+          <h1>Preferences &amp; Settings</h1>
+          <span class="header-subtitle">Customize download parameters, speech guide, and learning automation</span>
+        </div>
+      </div>
+      <span class="version-pill">v3.6.10</span>
+    </header>
+
+    <!-- Tab Bar -->
+    <div class="tabs">
+      <div class="tab" data-tab="course">
+        <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        <span>Course Backup &amp; Media</span>
+      </div>
+      <div class="tab active" data-tab="additional">
+        <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="5 3 19 12 5 21 5 3"></polygon>
+        </svg>
+        <span>Learning &amp; Speech</span>
+      </div>
+      <div class="tab" data-tab="integrity">
+        <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+        </svg>
+        <span>Academic Integrity</span>
+      </div>
+      <div class="tab" data-tab="general">
+        <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+          <line x1="6" y1="12" x2="10" y2="12"></line>
+        </svg>
+        <span>Shortcuts &amp; Info</span>
+      </div>
+    </div>
+
+    <!-- Tab 1: Course Backup (ID: course for compatibility) -->
+    <div id="course" class="tab-content">
+      <section>
+        <h3>Course Backup Engine</h3>
+        <p class="section-desc">Download course video lectures, subtitles, and document attachments packaged in ZIP files.</p>
+
+        <div class="control-group">
+          <label for="concurrency">Concurrent Parallel Downloads (1 - 10)</label>
+          <div class="slider-row">
+            <input type="range" id="concurrencySlider" class="range-slider" min="1" max="10" value="5" />
+            <input type="number" id="concurrency" min="1" max="10" value="5" style="width: 70px;" />
+            <span id="concurrencyBadge" class="number-badge">5</span>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label for="quality">Preferred Video Stream Quality</label>
+          <select id="quality">
+            <option value="720p">720p HD (Recommended)</option>
+            <option value="540p">540p Standard Definition</option>
+            <option value="360p">360p Low Bandwidth</option>
+          </select>
+        </div>
+
+        <div class="control-group">
+          <label for="subtitle">Subtitle Track Language</label>
+          <select id="subtitle"></select>
+        </div>
+      </section>
+
+      <div class="button-row">
+        <button id="saveBtn">
+          <span>💾</span>
+          <span>Save Backup Settings</span>
+        </button>
+      </div>
+      <div id="status"></div>
+    </div>
+
+    <!-- Tab 2: Learning & Speech (ID: additional for compatibility) -->
+    <div id="additional" class="tab-content active">
+      <section>
+        <h3>Audio &amp; Voice Assistance</h3>
+        <p class="section-desc">Audible guidance and progress cues while navigating courses.</p>
+        <div class="setting-item">
+          <input type="checkbox" id="speechToggle" />
+          <div class="setting-text">
+            <label for="speechToggle">Enable Speech Guide</label>
+            <span class="setting-item-desc">Uses browser Web Speech API to announce automation events and completed items.</span>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h3>Automated Learning Navigation</h3>
+        <p class="section-desc">Configure automation behavior for lectures, readings, and practice exercises.</p>
+
+        <div class="setting-item">
+          <input type="checkbox" id="autoPopupToggle" />
+          <div class="setting-text">
+            <label for="autoPopupToggle">Auto Popup on Expiry</label>
+            <span class="setting-item-desc">Automatically prompts you when a trial period or quota reset cycle is reached.</span>
+          </div>
+        </div>
+      </section>
+
+      <div class="button-row">
+        <button id="saveAdditionalBtn">
+          <span>💾</span>
+          <span>Save Preferences</span>
+        </button>
+      </div>
+      <div id="additionalStatus"></div>
+    </div>
+
+    <!-- Tab 3: Academic Integrity & Safety -->
+    <div id="integrity" class="tab-content">
+      <div class="callout-box info">
+        <svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="16" x2="12" y2="12"></line>
+          <line x1="12" y1="8" x2="12.01" y2="8"></line>
+        </svg>
+        <div>
+          <strong>Academic Integrity Notice:</strong>
+          This extension provides learning efficiency tools (such as reading auto-scroll and lecture trackers). Graded assignments, proctored exams, and peer assessments are protected under university honor codes and should reflect your personal learning mastery.
+        </div>
+      </div>
+
+      <section>
+        <h3>Assessment Safeguards &amp; Practice Helpers</h3>
+        <p class="section-desc">Options for quiz attempt helpers in practice modules. Exercise caution on graded assessments.</p>
+
+        <div class="setting-item">
+          <input type="checkbox" id="attemptAllQuizToggle" />
+          <div class="setting-text">
+            <label for="attemptAllQuizToggle">Attempt All Practice Quiz Questions</label>
+            <span class="setting-item-desc">Assists with question form navigation across multi-part practice quizzes.</span>
+          </div>
+        </div>
+
+        <div class="setting-item">
+          <input type="checkbox" id="autoQuizToggle" />
+          <div class="setting-text">
+            <label for="autoQuizToggle">Auto Quiz Navigation</label>
+            <span class="setting-item-desc">Automatically cycles through practice questions when opening interactive modules.</span>
+          </div>
+        </div>
+
+        <div class="setting-item">
+          <input type="checkbox" id="autoSubmitQuizToggle" />
+          <div class="setting-text">
+            <label for="autoSubmitQuizToggle">Auto Submit Practice Quizzes</label>
+            <span class="setting-item-desc">Submits answers when practice assessment reaches 100% completion.</span>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Tab 4: Shortcuts & Info -->
+    <div id="general" class="tab-content">
+      <section>
+        <h3>Keyboard Shortcuts</h3>
+        <p class="section-desc">Access extension popup tools instantly using global shortcuts.</p>
+        <div class="shortcut-list">
+          <div class="shortcut-row">
+            <span class="shortcut-label">Open Extension Dashboard (Primary)</span>
+            <span class="kbd-badge">Alt + B</span>
+          </div>
+          <div class="shortcut-row">
+            <span class="shortcut-label">Open Extension Dashboard (Secondary)</span>
+            <span class="kbd-badge">Alt + W</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="support-section">
+        <h3>Support &amp; Appreciation</h3>
+        <p class="section-desc">Enjoying the extension? Fuel the next update with a shawarma 🌯</p>
+        <div class="shawarma-card">
+          <div class="shawarma-card-info">
+            <span class="shawarma-card-title">Support Creator</span>
+            <span class="shawarma-card-desc">UPI ID: <code class="upi-highlight">9067972218@amazonpay</code></span>
+          </div>
+          <div class="shawarma-card-actions">
+            <a
+              href="upi://pay?pa=9067972218%40amazonpay&pn=NodeNexus&cu=INR"
+              id="settingsShawarmaBtn"
+              class="shawarma-btn"
+              role="button"
+              title="Open UPI payment intent for NodeNexus"
+            >
+              <span>🌯 Buy Me a Shawarma</span>
+            </a>
+            <button id="copyUpiSettingsBtn" class="shawarma-copy-btn" type="button" title="Copy UPI ID (9067972218@amazonpay)">
+              <span id="copyUpiSettingsIcon" aria-hidden="true">📋</span>
+              <span id="copyUpiSettingsText">Copy UPI ID</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h3>About Extension &amp; Credits</h3>
+        <p class="section-desc">Coursera Automation Suite • Developed to enhance learning accessibility and course navigation.</p>
+        <div class="shortcut-row">
+          <span class="shortcut-label">Creator</span>
+          <span class="kbd-badge brand-highlight">Creator: NodeNexus</span>
+        </div>
+        <div class="shortcut-row">
+          <span class="shortcut-label">Developer Profile</span>
+          <a
+            href="https://github.com/NodeNexus"
+            id="aboutGithubLink"
+            class="settings-github-link"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub profile of NodeNexus (opens in a new tab)"
+          >GitHub ↗</a>
+        </div>
+        <div class="shortcut-row">
+          <span class="shortcut-label">Version</span>
+          <span class="kbd-badge">3.6.10</span>
+        </div>
+        <div class="shortcut-row">
+          <span class="shortcut-label">Architecture</span>
+          <span class="kbd-badge">Manifest V3 Service Worker</span>
+        </div>
+      </section>
+    </div>
+
+    <!-- Settings Footer Area with NodeNexus Attribution -->
+    <footer class="settings-footer">
+      <div class="footer-attribution">
+        <span class="attribution-text" title="Creator: NodeNexus">Created by NodeNexus</span>
+        <span class="attribution-divider" aria-hidden="true">•</span>
+        <a
+          href="https://github.com/NodeNexus"
+          id="settingsFooterGithubLink"
+          class="attribution-link"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="GitHub profile of NodeNexus (opens in a new tab)"
+        >GitHub ↗</a>
+      </div>
+    </footer>
+  </div>
+
+  <script src="scripts/settings.js"></script>
+  <script src="scripts/settings-ui.js"></script>
+</body>
+
+</html>
