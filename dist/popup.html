@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Coursera Automation Extension</title>
+    <title>Coursera Automator Pro</title>
     <link rel="stylesheet" href="ui/design-tokens.css" />
     <link rel="stylesheet" href="ui/popup.css" />
     <script src="scripts/popup.js"></script>
@@ -15,13 +15,22 @@
       <!-- Top Brand & Header -->
       <header class="app-header">
         <div class="brand-wrapper">
-          <div class="brand-icon-box" title="Coursera Automator">
-            <svg viewBox="0 0 24 24" width="20" height="20">
-              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <div class="brand-icon-box" title="Coursera Automator Pro">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="brandGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#8b5cf6"/>
+                  <stop offset="100%" stop-color="#38bdf8"/>
+                </linearGradient>
+              </defs>
+              <!-- Bold C arc -->
+              <path d="M18 5.5A9.5 9.5 0 1 0 18 18.5" stroke="url(#brandGrad)" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+              <!-- Lightning bolt -->
+              <path d="M13 3.5L8.5 12.5H12.5L10 20.5L16.5 10H12.5L15 3.5Z" fill="url(#brandGrad)"/>
             </svg>
           </div>
           <div class="brand-text">
-            <h1 id="courseraModelTitle">Coursera Automator</h1>
+            <h1 id="courseraModelTitle">Coursera Automator Pro</h1>
             <span class="brand-version">v3.6.10 • Pro Suite</span>
           </div>
         </div>

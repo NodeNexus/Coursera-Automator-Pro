@@ -1,0 +1,254 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coursera Automator Pro &mdash; NodeNexus</title>
+  <meta name="description" content="Coursera Automator Pro is a free, privacy-focused Chromium browser extension by NodeNexus that automates lecture video navigation, readings, practice exercises, and course backups on Coursera." />
+  <meta name="author" content="NodeNexus" />
+  <meta property="og:title" content="Coursera Automator Pro" />
+  <meta property="og:description" content="Automate Coursera lecture videos, readings, practice exercises, and course backups. Free, open-source, and privacy-first." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--bg-base:#060913;--bg-primary:#0b0f19;--bg-secondary:#111827;--bg-elevated:#162032;--accent-purple:#8b5cf6;--accent-purple-light:#a78bfa;--accent-blue:#38bdf8;--gradient-accent:linear-gradient(135deg,#8b5cf6 0%,#38bdf8 100%);--text-primary:#f8fafc;--text-secondary:#94a3b8;--text-muted:#64748b;--border-subtle:rgba(255,255,255,0.08);--border-glow:rgba(139,92,246,0.35);--success:#10b981;--radius-md:12px;--radius-lg:18px;--radius-pill:9999px;--font:'Inter',-apple-system,BlinkMacSystemFont,sans-serif}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--font);background:var(--bg-base);color:var(--text-primary);line-height:1.6;overflow-x:hidden}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 2rem;background:rgba(6,9,19,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border-subtle)}
+    .nav-brand{display:flex;align-items:center;gap:.625rem;text-decoration:none;color:var(--text-primary);font-weight:700;font-size:1rem}
+    .nav-logo-icon{width:30px;height:30px;background:var(--gradient-accent);border-radius:8px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 16px rgba(139,92,246,.4)}
+    .nav-logo-icon svg{width:18px;height:18px}
+    .nav-links{display:flex;align-items:center;gap:1.5rem;list-style:none}
+    .nav-links a{color:var(--text-secondary);text-decoration:none;font-size:.875rem;font-weight:500;transition:color .2s}
+    .nav-links a:hover{color:var(--text-primary)}
+    .nav-cta{background:var(--gradient-accent);color:#fff !important;padding:.5rem 1.25rem;border-radius:var(--radius-pill);font-weight:600 !important;transition:opacity .2s,transform .2s !important;box-shadow:0 0 20px rgba(139,92,246,.35)}
+    .nav-cta:hover{opacity:.88;transform:translateY(-1px)}
+    .hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8rem 1.5rem 5rem;overflow:hidden}
+    .hero-glow{position:absolute;width:700px;height:700px;top:-120px;left:50%;transform:translateX(-50%);background:radial-gradient(circle,rgba(139,92,246,.18) 0%,transparent 70%);pointer-events:none;animation:pulse 6s ease-in-out infinite}
+    .hero-glow2{position:absolute;width:500px;height:500px;bottom:-60px;right:-120px;background:radial-gradient(circle,rgba(56,189,248,.12) 0%,transparent 70%);pointer-events:none;animation:pulse 8s ease-in-out infinite reverse}
+    @keyframes pulse{0%,100%{opacity:.7;transform:translateX(-50%) scale(1)}50%{opacity:1;transform:translateX(-50%) scale(1.08)}}
+    @keyframes pulse2{0%,100%{opacity:.6}50%{opacity:1}}
+    .hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.3);border-radius:var(--radius-pill);padding:.35rem 1rem;font-size:.8125rem;font-weight:600;color:var(--accent-purple-light);margin-bottom:1.75rem;animation:fadeup .6s ease both}
+    .dot{width:6px;height:6px;background:var(--success);border-radius:50%;animation:blink 2s ease-in-out infinite}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+    .hero-logo{width:96px;height:96px;margin:0 auto 1.5rem;animation:fadeup .6s .1s ease both;filter:drop-shadow(0 0 28px rgba(139,92,246,.5))}
+    .hero h1{font-size:clamp(2.5rem,6vw,4.5rem);font-weight:900;line-height:1.1;letter-spacing:-.03em;margin-bottom:1.25rem;background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:fadeup .6s .15s ease both}
+    .hero-sub{font-size:clamp(1rem,2.5vw,1.25rem);color:var(--text-secondary);max-width:620px;margin:0 auto 2.5rem;line-height:1.7;animation:fadeup .6s .25s ease both}
+    .hero-actions{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;animation:fadeup .6s .35s ease both}
+    .btn-primary{display:inline-flex;align-items:center;gap:.5rem;background:var(--gradient-accent);color:#fff;font-weight:700;font-size:1rem;padding:.875rem 2rem;border-radius:var(--radius-pill);text-decoration:none;box-shadow:0 0 32px rgba(139,92,246,.4),0 4px 16px rgba(0,0,0,.4);transition:transform .2s,box-shadow .2s}
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 48px rgba(139,92,246,.55),0 8px 24px rgba(0,0,0,.5)}
+    .btn-secondary{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,255,255,.06);border:1px solid var(--border-subtle);color:var(--text-primary);font-weight:600;font-size:1rem;padding:.875rem 2rem;border-radius:var(--radius-pill);text-decoration:none;transition:background .2s,border-color .2s,transform .2s;backdrop-filter:blur(8px)}
+    .btn-secondary:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2);transform:translateY(-2px)}
+    .hero-stats{display:flex;gap:2.5rem;margin-top:3.5rem;justify-content:center;flex-wrap:wrap;animation:fadeup .6s .45s ease both}
+    .stat-item{text-align:center}
+    .stat-value{font-size:1.75rem;font-weight:800;background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+    .stat-label{font-size:.8rem;color:var(--text-muted);font-weight:500;margin-top:.25rem;text-transform:uppercase;letter-spacing:.06em}
+    @keyframes fadeup{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+    section{position:relative;padding:5rem 1.5rem}
+    .container{max-width:1100px;margin:0 auto}
+    .section-tag{display:inline-block;background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.25);color:var(--accent-purple-light);font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:.3rem .875rem;border-radius:var(--radius-pill);margin-bottom:1rem}
+    .section-title{font-size:clamp(1.75rem,4vw,2.75rem);font-weight:800;letter-spacing:-.025em;line-height:1.2;margin-bottom:.75rem}
+    .section-desc{color:var(--text-secondary);font-size:1rem;max-width:560px}
+    .features-header{text-align:center;margin-bottom:3rem}
+    .features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.25rem}
+    .feature-card{background:rgba(15,23,42,.78);border:1px solid var(--border-subtle);border-radius:var(--radius-lg);padding:1.75rem;transition:border-color .25s,transform .25s,box-shadow .25s;position:relative;overflow:hidden}
+    .feature-card:hover{border-color:rgba(139,92,246,.35);transform:translateY(-4px);box-shadow:0 16px 40px -8px rgba(139,92,246,.25)}
+    .feature-icon{width:44px;height:44px;background:linear-gradient(135deg,rgba(139,92,246,.2) 0%,rgba(56,189,248,.12) 100%);border:1px solid rgba(139,92,246,.25);border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;font-size:1.25rem;margin-bottom:1rem}
+    .feature-title{font-size:1rem;font-weight:700;margin-bottom:.5rem}
+    .feature-desc{font-size:.875rem;color:var(--text-secondary);line-height:1.65}
+    .privacy-section{background:rgba(11,15,25,.8);border-top:1px solid var(--border-subtle);border-bottom:1px solid var(--border-subtle)}
+    .privacy-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+    .privacy-item{display:flex;align-items:flex-start;gap:.875rem;margin-bottom:1.25rem}
+    .privacy-check{flex-shrink:0;width:22px;height:22px;background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.35);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--success);font-size:.75rem;margin-top:2px}
+    .privacy-text strong{display:block;font-size:.9rem;font-weight:600;margin-bottom:.2rem}
+    .privacy-text span{font-size:.8rem;color:var(--text-secondary)}
+    .install-steps{display:flex;flex-direction:column;gap:1rem;margin-top:2rem}
+    .step-item{display:flex;align-items:flex-start;gap:1rem;background:rgba(15,23,42,.6);border:1px solid var(--border-subtle);border-radius:var(--radius-md);padding:1.25rem;transition:border-color .2s}
+    .step-item:hover{border-color:rgba(139,92,246,.3)}
+    .step-num{flex-shrink:0;width:32px;height:32px;background:var(--gradient-accent);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8125rem;font-weight:800;color:#fff}
+    .step-content strong{display:block;font-weight:600;font-size:.9rem;margin-bottom:.2rem}
+    .step-content span{font-size:.8rem;color:var(--text-secondary)}
+    code{background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.2);border-radius:4px;padding:.1em .45em;font-family:'Cascadia Code','Fira Code','Consolas',monospace;font-size:.85em;color:var(--accent-purple-light)}
+    .shortcuts-table{width:100%;border-collapse:collapse;margin-top:1.5rem;font-size:.875rem}
+    .shortcuts-table th,.shortcuts-table td{text-align:left;padding:.875rem 1rem;border-bottom:1px solid var(--border-subtle)}
+    .shortcuts-table th{color:var(--text-muted);font-size:.75rem;text-transform:uppercase;letter-spacing:.07em;font-weight:600}
+    .shortcuts-table td{color:var(--text-secondary)}
+    .shortcuts-table tr:last-child td{border-bottom:none}
+    .kbd{display:inline-flex;align-items:center;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:6px;padding:.2rem .55rem;font-size:.8125rem;font-family:'Cascadia Code',monospace;color:var(--text-primary);font-weight:600}
+    .donate-section{text-align:center}
+    .donate-card{display:inline-block;background:rgba(15,23,42,.78);border:1px solid var(--border-glow);border-radius:24px;padding:3rem 2.5rem;max-width:540px;box-shadow:0 0 60px rgba(139,92,246,.15)}
+    .donate-emoji{font-size:3rem;margin-bottom:1rem}
+    .donate-title{font-size:1.5rem;font-weight:800;margin-bottom:.75rem}
+    .donate-desc{color:var(--text-secondary);font-size:.9rem;margin-bottom:2rem;line-height:1.65}
+    .donate-btn{display:inline-flex;align-items:center;gap:.5rem;background:linear-gradient(135deg,#f97316,#f59e0b);color:#fff;font-weight:700;font-size:1rem;padding:.875rem 2rem;border-radius:var(--radius-pill);text-decoration:none;box-shadow:0 4px 20px rgba(249,115,22,.3);transition:transform .2s,box-shadow .2s}
+    .donate-btn:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(249,115,22,.45)}
+    .upi-hint{margin-top:1rem;font-size:.8rem;color:var(--text-muted)}
+    footer{background:var(--bg-primary);border-top:1px solid var(--border-subtle);padding:2rem 1.5rem;text-align:center}
+    .footer-logo{font-size:1rem;font-weight:700;background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.5rem}
+    .footer-links{display:flex;gap:1.5rem;justify-content:center;list-style:none;margin-bottom:1rem}
+    .footer-links a{color:var(--text-muted);text-decoration:none;font-size:.8125rem;transition:color .2s}
+    .footer-links a:hover{color:var(--text-secondary)}
+    .footer-copy{font-size:.8rem;color:var(--text-muted)}
+    .reveal{opacity:0;transform:translateY(30px);transition:opacity .65s ease,transform .65s ease}
+    .reveal.visible{opacity:1;transform:none}
+    @media(max-width:768px){nav{padding:.875rem 1.25rem}.nav-links{display:none}.privacy-grid{grid-template-columns:1fr;gap:2rem}}
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-brand" aria-label="Coursera Automator Pro Home">
+    <div class="nav-logo-icon">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M18 5.5A9.5 9.5 0 1 0 18 18.5" stroke="white" stroke-width="2.2" stroke-linecap="round" fill="none"/><path d="M13 3.5L8.5 12.5H12.5L10 20.5L16.5 10H12.5L15 3.5Z" fill="white"/></svg>
+    </div>
+    Coursera Automator Pro
+  </a>
+  <ul class="nav-links">
+    <li><a href="#features">Features</a></li>
+    <li><a href="#privacy">Privacy</a></li>
+    <li><a href="#install">Install</a></li>
+    <li><a href="#donate">Support</a></li>
+    <li><a href="https://github.com/NodeNexus/Coursera-Automator-Pro" class="nav-cta" target="_blank" rel="noopener">GitHub &uarr;</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="home">
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-badge"><span class="dot"></span>Free &amp; Open Source &middot; v3.6.10</div>
+  <svg class="hero-logo" viewBox="0 0 96 96" fill="none">
+    <defs>
+      <linearGradient id="g1" x1="0" y1="0" x2="96" y2="96" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#8b5cf6"/><stop offset="100%" stop-color="#38bdf8"/></linearGradient>
+      <filter id="glow"><feGaussianBlur stdDeviation="4" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    </defs>
+    <rect width="96" height="96" rx="22" fill="#0b0f19"/>
+    <path d="M70 22A38 38 0 1 0 70 74" stroke="url(#g1)" stroke-width="9" stroke-linecap="round" fill="none" filter="url(#glow)"/>
+    <path d="M54 14L37 50H50L44 82L68 40H54L62 14Z" fill="url(#g1)" filter="url(#glow)"/>
+  </svg>
+  <h1>Coursera Automator Pro</h1>
+  <p class="hero-sub">A free, privacy-first Chromium extension that supercharges your Coursera experience &mdash; auto-play lectures, progress readings, navigate practice exercises, and backup entire courses. Built by <strong>NodeNexus</strong>.</p>
+  <div class="hero-actions">
+    <a href="https://github.com/NodeNexus/Coursera-Automator-Pro" id="hero-github-btn" class="btn-primary" target="_blank" rel="noopener">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+      View on GitHub
+    </a>
+    <a href="#install" id="hero-install-btn" class="btn-secondary">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      How to Install
+    </a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-item"><div class="stat-value">MV3</div><div class="stat-label">Manifest V3</div></div>
+    <div class="stat-item"><div class="stat-value">0</div><div class="stat-label">Data Collected</div></div>
+    <div class="stat-item"><div class="stat-value">6</div><div class="stat-label">Permissions Only</div></div>
+    <div class="stat-item"><div class="stat-value">100%</div><div class="stat-label">Local Processing</div></div>
+  </div>
+</section>
+
+<section id="features">
+  <div class="container">
+    <div class="features-header reveal">
+      <div class="section-tag">Features</div>
+      <h2 class="section-title">Everything you need to learn faster</h2>
+      <p class="section-desc">A complete toolkit for Coursera power users. All features run locally in your browser.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card reveal"><div class="feature-icon">&#9654;</div><div class="feature-title">Lecture Video Automation</div><div class="feature-desc">Smooth auto-play, speed controls, and automatic progression across all course video lectures with zero manual clicks.</div></div>
+      <div class="feature-card reveal"><div class="feature-icon">&#128218;</div><div class="feature-title">Reading &amp; Discussion Assistants</div><div class="feature-desc">Auto-scroll and completion markers for reading assignments and discussion forums.</div></div>
+      <div class="feature-card reveal"><div class="feature-icon">&#128221;</div><div class="feature-title">Practice Question Helpers</div><div class="feature-desc">Sequential navigation through ungraded practice modules. Strictly for practice, not graded assessments.</div></div>
+      <div class="feature-card reveal"><div class="feature-icon">&#128190;</div><div class="feature-title">Course Backup Engine</div><div class="feature-desc">Download video lectures, subtitles, and attachments as ZIPs. Up to 10 parallel workers for speed.</div></div>
+      <div class="feature-card reveal"><div class="feature-icon">&#128266;</div><div class="feature-title">Audio &amp; Speech Guidance</div><div class="feature-desc">Optional Web Speech API announcements for hands-free learning milestones.</div></div>
+      <div class="feature-card reveal"><div class="feature-icon">&#127769;</div><div class="feature-title">Modern Dark UI</div><div class="feature-desc">Midnight Navy base with purple &amp; cyan accents, WCAG 2.1 AA focus indicators, and inline search.</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="privacy" class="privacy-section">
+  <div class="container">
+    <div class="privacy-grid">
+      <div class="reveal">
+        <div class="section-tag">Security &amp; Privacy</div>
+        <h2 class="section-title">Your data never leaves your browser</h2>
+        <p class="section-desc">Audited by NodeNexus &mdash; zero data exfiltration, least privilege permissions.</p>
+      </div>
+      <div class="reveal">
+        <div class="privacy-item"><div class="privacy-check">&#10003;</div><div class="privacy-text"><strong>Zero Cookie Exfiltration</strong><span>No session cookies read or transmitted. "cookies" permission removed entirely.</span></div></div>
+        <div class="privacy-item"><div class="privacy-check">&#10003;</div><div class="privacy-text"><strong>Zero Covert Network Requests</strong><span>No external proxy calls. All logic runs in your browser without leaving the device.</span></div></div>
+        <div class="privacy-item"><div class="privacy-check">&#10003;</div><div class="privacy-text"><strong>Zero Forced Redirects</strong><span>No auto-opening promo links or payment redirects on install or update.</span></div></div>
+        <div class="privacy-item"><div class="privacy-check">&#10003;</div><div class="privacy-text"><strong>Least Privilege Permissions</strong><span>Only 6 permissions &mdash; all strictly required for documented, user-facing features.</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="install">
+  <div class="container">
+    <div class="reveal" style="margin-bottom:2rem">
+      <div class="section-tag">Get Started</div>
+      <h2 class="section-title">Install in 5 steps</h2>
+      <p class="section-desc">Works on Chrome, Brave, Edge, or any Chromium browser supporting Manifest V3.</p>
+    </div>
+    <div class="install-steps">
+      <div class="step-item reveal"><div class="step-num">1</div><div class="step-content"><strong>Clone or Download</strong><span>Run <code>git clone https://github.com/NodeNexus/Coursera-Automator-Pro.git</code> or download ZIP.</span></div></div>
+      <div class="step-item reveal"><div class="step-num">2</div><div class="step-content"><strong>Open Browser Extensions</strong><span>Navigate to <code>chrome://extensions</code> in your Chromium browser.</span></div></div>
+      <div class="step-item reveal"><div class="step-num">3</div><div class="step-content"><strong>Enable Developer Mode</strong><span>Toggle <strong>Developer mode</strong> in the upper-right corner.</span></div></div>
+      <div class="step-item reveal"><div class="step-num">4</div><div class="step-content"><strong>Load Unpacked Extension</strong><span>Click <strong>Load unpacked</strong> and select the folder containing <code>manifest.json</code> and the <code>dist/</code> folder.</span></div></div>
+      <div class="step-item reveal"><div class="step-num">5</div><div class="step-content"><strong>You&rsquo;re Ready!</strong><span>The <strong>Coursera Automator Pro</strong> icon appears in your toolbar. Press <kbd class="kbd">Alt+B</kbd> to open the dashboard.</span></div></div>
+    </div>
+    <div style="margin-top:2.5rem" class="reveal">
+      <h3 style="font-size:1.125rem;font-weight:700;margin-bottom:1rem">Keyboard Shortcuts</h3>
+      <table class="shortcuts-table">
+        <thead><tr><th>Windows / Linux</th><th>macOS</th><th>Action</th></tr></thead>
+        <tbody>
+          <tr><td><kbd class="kbd">Alt + B</kbd></td><td><kbd class="kbd">Cmd + B</kbd></td><td>Open Dashboard (Primary)</td></tr>
+          <tr><td><kbd class="kbd">Alt + W</kbd></td><td><kbd class="kbd">Cmd + W</kbd></td><td>Open Dashboard (Secondary)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="donate" class="donate-section">
+  <div class="container">
+    <div class="donate-card reveal">
+      <div class="donate-emoji">&#127791;</div>
+      <h2 class="donate-title">Buy Me a Shawarma</h2>
+      <p class="donate-desc">Enjoying Coursera Automator Pro? Fuel the next update with a shawarma! Contributions are 100% voluntary &mdash; the extension is always fully free.</p>
+      <a href="upi://pay?pa=9067972218%40amazonpay&pn=NodeNexus&cu=INR" id="donate-upi-btn" class="donate-btn">&#127791; Pay via UPI</a>
+      <div class="upi-hint">UPI ID: <code>9067972218@amazonpay</code> &middot; Google Pay &middot; PhonePe &middot; Paytm &middot; Amazon Pay</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Coursera Automator Pro</div>
+  <ul class="footer-links">
+    <li><a href="https://github.com/NodeNexus/Coursera-Automator-Pro" target="_blank" rel="noopener">GitHub</a></li>
+    <li><a href="https://github.com/NodeNexus" target="_blank" rel="noopener">NodeNexus</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#install">Install</a></li>
+  </ul>
+  <p class="footer-copy">&copy; 2026 NodeNexus. MIT License &amp; GPLv3 (JSZip). Made with &#9749; and &#127791;</p>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)} });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach((el,i) => {
+    if(el.classList.contains('feature-card')) el.style.transitionDelay = (i%6*0.07)+'s';
+    obs.observe(el);
+  });
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const t = document.querySelector(a.getAttribute('href'));
+      if(t) t.scrollIntoView({behavior:'smooth',block:'start'});
+    });
+  });
+</script>
+</body>
+</html>

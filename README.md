@@ -1,7 +1,7 @@
-# Coursera Automation Extension (MV3)
+# Coursera Automator Pro (MV3)
 
 > **Created by NodeNexus**  
-> **Creator: NodeNexus**  
+> **Creator: Vaishnav Balpande**  
 > **[GitHub ↗](https://github.com/NodeNexus)**
 
 A production-grade, privacy-focused Chromium browser extension (Manifest V3) built to streamline learning navigation, lecture video automation, reading material progression, and course content backups on Coursera.
@@ -10,7 +10,7 @@ A production-grade, privacy-focused Chromium browser extension (Manifest V3) bui
 
 ## 🌟 Overview & Feature Suite
 
-The **Coursera Automation Extension** provides legitimate local productivity tools to enhance your learning experience:
+The **Coursera Automator Pro** provides legitimate local productivity tools to enhance your learning experience:
 
 - **Lecture Video Automation**: Smooth auto-play, speed controls, and automatic progression across course video lectures.
 - **Reading & Discussion Assistants**: Auto-scroll and completion markers for reading assignments and discussion forums.
@@ -65,14 +65,14 @@ This extension has undergone a security audit and hardening by **NodeNexus**:
 ### Manual Loading Steps
 1. Clone or download this repository to your local system:
    ```bash
-   git clone https://github.com/NodeNexus/coursera-automation-extension.git
+   git clone https://github.com/NodeNexus/Coursera-Automator-Pro.git
    ```
 2. Open your Chromium browser and navigate to the Extensions management page:
    - URL: `chrome://extensions`
 3. Enable **Developer mode** using the toggle switch located in the upper-right corner.
 4. Click the **Load unpacked** button in the top toolbar.
 5. Select the project directory (containing `manifest.json` and the `dist` folder).
-6. The **Coursera Automation Extension** icon will now appear in your browser toolbar!
+6. The **Coursera Automator Pro** icon will now appear in your browser toolbar!
 
 ---
 

@@ -1,10 +1,10 @@
 {
   "manifest_version": 3,
-  "name": "Coursera Automation Extension",
+  "name": "Coursera Automator Pro",
   "version": "3.6.10",
   "author": "NodeNexus",
   "version_name": "Release Version",
-  "description": "Created by NodeNexus • Extension to automate Coursera lecture video navigation, readings, practice exercises, and course backups.",
+  "description": "Created by NodeNexus • Coursera Automator Pro — automate Coursera lecture video navigation, readings, practice exercises, and course backups.",
   "permissions": [
     "storage",
     "activeTab",
